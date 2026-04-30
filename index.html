@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>91st Reconnaissance Corps — Добро пожаловать</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --red-dim: #8B2020;
+    --red-glow: rgba(192,57,43,0.35);
+    --dark: #080A0C;
+    --panel: #0D1015;
+    --panel-border: #1A2030;
+    --text: #C8CED8;
+    --text-dim: #4A5A6A;
+    --accent: #4A90D9;
+    --success: #4AD98A;
+    --gold: #D4A843;
+    --warning: #D9A84A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 60px;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .header-top {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--red-dim);
+    letter-spacing: 5px;
+    margin-bottom: 18px;
+  }
+
+  .header h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(22px, 5vw, 38px);
+    font-weight: 900;
+    color: var(--red);
+    letter-spacing: 3px;
+    text-shadow: 0 0 30px var(--red-glow);
+    line-height: 1.15;
+  }
+
+  .header-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 4px;
+    margin-top: 10px;
+  }
+
+  .header-div {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .header-div::before, .header-div::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--red-dim), transparent);
+  }
+  .header-div span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--red-dim);
+    letter-spacing: 3px;
+  }
+
+  /* INTRO */
+  .intro {
+    background: var(--panel);
+    border-left: 3px solid var(--red);
+    border: 1px solid var(--panel-border);
+    border-left: 3px solid var(--red);
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    line-height: 1.95;
+    color: var(--text-dim);
+  }
+
+  .intro strong { color: var(--text); font-weight: 600; }
+  .intro em { color: var(--red); font-style: normal; }
+
+  /* SECTION */
+  .section { margin-bottom: 36px; }
+
+  .sec-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .sec-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    background: rgba(192,57,43,0.1);
+    border: 1px solid rgba(192,57,43,0.3);
+    padding: 3px 9px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .sec-name {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(11px, 2vw, 14px);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .sec-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--panel-border), transparent);
+  }
+
+  /* BASE CARDS */
+  .bases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .base {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .base:hover { transform: translateY(-2px); border-color: rgba(192,57,43,0.3); }
+
+  .base-top {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--panel-border);
+  }
+
+  .base-top.a { background: rgba(74,144,217,0.08); }
+  .base-top.b { background: rgba(212,168,67,0.08); }
+  .base-top.c { background: rgba(74,217,138,0.08); }
+
+  .base-icon { font-size: 18px; margin-bottom: 5px; }
+
+  .base-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .base-top.a .base-name { color: var(--accent); }
+  .base-top.b .base-name { color: var(--gold); }
+  .base-top.c .base-name { color: var(--success); }
+
+  .base-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    margin-top: 3px;
+  }
+
+  .base-body {
+    padding: 12px 16px;
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.9;
+  }
+
+  .base-body li { list-style: none; }
+  .base-body li::before { content: '› '; color: var(--red-dim); }
+
+  /* ROLE ROWS */
+  .roles { display: flex; flex-direction: column; gap: 10px; }
+
+  .role {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-left: 3px solid;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    align-items: start;
+    transition: transform 0.3s;
+  }
+
+  .role:hover { transform: translateX(4px); }
+
+  .role.red { border-left-color: var(--red); }
+  .role.gold { border-left-color: var(--gold); }
+  .role.blue { border-left-color: var(--accent); }
+  .role.green { border-left-color: var(--success); }
+  .role.warn { border-left-color: var(--warning); }
+  .role.dim { border-left-color: var(--text-dim); }
+
+  .role-left { display: flex; flex-direction: column; gap: 4px; }
+
+  .role-icon { font-size: 18px; }
+
+  .role-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .role.red .role-name { color: var(--red); }
+  .role.gold .role-name { color: var(--gold); }
+  .role.blue .role-name { color: var(--accent); }
+  .role.green .role-name { color: var(--success); }
+  .role.warn .role-name { color: var(--warning); }
+  .role.dim .role-name { color: var(--text-dim); }
+
+  .role-base {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+
+  .role-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  .role-desc li { list-style: none; }
+  .role-desc li::before { content: '› '; color: var(--text-dim); }
+
+  /* FLOW */
+  .flow {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    padding: 22px 24px;
+  }
+
+  .flow-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+  }
+
+  .flow-step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+
+  .flow-step:last-child { margin-bottom: 0; }
+
+  .flow-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    background: rgba(192,57,43,0.1);
+    border: 1px solid rgba(192,57,43,0.25);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .flow-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    padding-top: 4px;
+  }
+
+  .flow-text strong { color: var(--text); font-weight: 600; }
+
+  /* CREDITS */
+  .credits-box {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    padding: 22px 24px;
+  }
+
+  .credits-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.9;
+    margin-bottom: 18px;
+  }
+
+  .credits-desc strong { color: var(--text); font-weight: 600; }
+  .credits-desc em { color: var(--gold); font-style: normal; }
+
+  .credits-rows { display: flex; flex-direction: column; gap: 8px; }
+
+  .credits-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 14px;
+    background: rgba(212,168,67,0.05);
+    border: 1px solid rgba(212,168,67,0.12);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+  }
+
+  .credits-row .cr-name { color: var(--text-dim); }
+  .credits-row .cr-val { color: var(--gold); font-weight: 700; }
+
+  .credits-note {
+    margin-top: 14px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    padding: 12px 14px;
+    border: 1px solid var(--panel-border);
+  }
+
+  .credits-note span { color: var(--red); }
+
+  /* DONАТ */
+  .donate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .donate-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-top: 2px solid;
+    padding: 16px 18px;
+    transition: transform 0.3s;
+  }
+
+  .donate-card:hover { transform: translateY(-2px); }
+  .donate-card.a { border-top-color: var(--gold); }
+  .donate-card.b { border-top-color: var(--red); }
+  .donate-card.c { border-top-color: var(--accent); }
+
+  .donate-icon { font-size: 20px; margin-bottom: 8px; }
+
+  .donate-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .donate-card.a .donate-title { color: var(--gold); }
+  .donate-card.b .donate-title { color: var(--red); }
+  .donate-card.c .donate-title { color: var(--accent); }
+
+  .donate-list {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.9;
+    list-style: none;
+  }
+
+  .donate-list li::before { content: '› '; color: var(--text-dim); }
+
+  .donate-note {
+    margin-top: 12px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    padding: 10px 14px;
+    border: 1px solid var(--panel-border);
+    line-height: 1.7;
+  }
+
+  .donate-note span { color: var(--success); }
+
+  /* ENTRY */
+  .entry-steps { display: flex; flex-direction: column; gap: 10px; }
+
+  .entry-step {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    padding: 14px 18px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: border-color 0.3s;
+  }
+
+  .entry-step:hover { border-color: rgba(192,57,43,0.3); }
+
+  .entry-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--red);
+    min-width: 32px;
+    text-shadow: 0 0 10px var(--red-glow);
+  }
+
+  .entry-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .entry-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .rules-box {
+    margin-top: 14px;
+    background: rgba(192,57,43,0.05);
+    border: 1px solid rgba(192,57,43,0.2);
+    padding: 16px 18px;
+  }
+
+  .rules-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+
+  .rules-list {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 2;
+    list-style: none;
+  }
+
+  .rules-list li::before { content: '! '; color: var(--red); font-weight: 700; }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 56px;
+    text-align: center;
+    border-top: 1px solid var(--panel-border);
+    padding-top: 24px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    line-height: 2.2;
+  }
+
+  .footer span { color: var(--red-dim); }
+
+  @media (max-width: 520px) {
+    .role {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">ГАЛАКТИЧЕСКАЯ РЕСПУБЛИКА // ОТКРЫТЫЙ БЕТА ТЕСТ</div>
+    <h1>91-Й РАЗВЕДОВАТЕЛЬНЫЙ КОРПУС</h1>
+    <div class="header-sub">GMOD STAR WARS RP // RU SERVER</div>
+    <div class="header-div"><span>ДОБРО ПОЖАЛОВАТЬ, СОЛДАТ</span></div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    Мы не обычный SWRP сервер. Никаких десяти легионов на одной базе, никакого бесконечного стояния на постах.<br><br>
+    <strong>91-й разведывательный корпус</strong> заброшен в тыл врага — сектор рядом с Умбарой. Скрытная операция, постоянный дефицит ресурсов, агрессивная фауна планеты. <em>Здесь каждый солдат имеет значение.</em>
+  </div>
+
+  <!-- 01 БАЗЫ -->
+  <div class="section">
+    <div class="sec-title">
+      <div class="sec-tag">01</div>
+      <div class="sec-name">Три базы — три роли</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="bases">
+      <div class="base">
+        <div class="base-top a">
+          <div class="base-icon">🛸</div>
+          <div class="base-name">Крейсер</div>
+          <div class="base-sub">// ОРБИТА — ШТАБ</div>
+        </div>
+        <div class="base-body">
+          <ul>
+            <li>Командование</li>
+            <li>Военная полиция</li>
+            <li>Медики</li>
+            <li>Рядовые бойцы</li>
+          </ul>
+        </div>
+      </div>
+      <div class="base">
+        <div class="base-top b">
+          <div class="base-icon">⚙️</div>
+          <div class="base-name">Наземная база</div>
+          <div class="base-sub">// АНГАР — ТЕХХАБ</div>
+        </div>
+        <div class="base-body">
+          <ul>
+            <li>Инженеры</li>
+            <li>Пилоты</li>
+            <li>Ангар с техникой</li>
+            <li>Радар и рубка</li>
+          </ul>
+        </div>
+      </div>
+      <div class="base">
+        <div class="base-top c">
+          <div class="base-icon">🔭</div>
+          <div class="base-name">Аванпост</div>
+          <div class="base-sub">// ПЕРЕДОВАЯ ЛИНИЯ</div>
+        </div>
+        <div class="base-body">
+          <ul>
+            <li>Разведчики</li>
+            <li>Наземная техника</li>
+            <li>Аэродром</li>
+            <li>Добывающий комплекс</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 РОЛИ -->
+  <div class="section">
+    <div class="sec-title">
+      <div class="sec-tag">02</div>
+      <div class="sec-name">Подразделения и обязанности</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="roles">
+      <div class="role red">
+        <div class="role-left">
+          <div class="role-icon">🔴</div>
+          <div class="role-name">Разведчики</div>
+          <div class="role-base">Аванпост</div>
+        </div>
+        <ul class="role-desc">
+          <li>Патрули между базами, проверка угроз</li>
+          <li>Первый контакт с существами</li>
+          <li>Рапорты после каждого патруля</li>
+        </ul>
+      </div>
+      <div class="role gold">
+        <div class="role-left">
+          <div class="role-icon">⚙️</div>
+          <div class="role-name">Инженеры</div>
+          <div class="role-base">Наземная база</div>
+        </div>
+        <ul class="role-desc">
+          <li>Мониторинг радара — центра оповещений</li>
+          <li>Ремонт оборудования на маршруте</li>
+          <li>Восстановление систем старой базы</li>
+          <li>Координируют все подразделения</li>
+        </ul>
+      </div>
+      <div class="role blue">
+        <div class="role-left">
+          <div class="role-icon">🚁</div>
+          <div class="role-name">Пилоты</div>
+          <div class="role-base">Наземная база</div>
+        </div>
+        <ul class="role-desc">
+          <li>Переброска бойцов на LAAT</li>
+          <li>Эвакуация раненых с поля</li>
+          <li>В метель — полёты запрещены</li>
+          <li>Техобслуживание авиатехники</li>
+        </ul>
+      </div>
+      <div class="role green">
+        <div class="role-left">
+          <div class="role-icon">➕</div>
+          <div class="role-name">Медики</div>
+          <div class="role-base">Крейсер</div>
+        </div>
+        <ul class="role-desc">
+          <li>Лазарет на крейсере</li>
+          <li>Полевой медик в патрулях</li>
+          <li>В метель — лечение обмороженных</li>
+        </ul>
+      </div>
+      <div class="role warn">
+        <div class="role-left">
+          <div class="role-icon">🛡️</div>
+          <div class="role-name">Штурмовики</div>
+          <div class="role-base">Крейсер</div>
+        </div>
+        <ul class="role-desc">
+          <li>Посты охраны на базах</li>
+          <li>Эскорт инженеров и медиков</li>
+          <li>Усиление разведчиков при угрозе</li>
+        </ul>
+      </div>
+      <div class="role dim">
+        <div class="role-left">
+          <div class="role-icon">🚨</div>
+          <div class="role-name">Военная полиция</div>
+          <div class="role-base">Крейсер</div>
+        </div>
+        <ul class="role-desc">
+          <li>Охрана крейсера и командования</li>
+          <li>Контроль дисциплины</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 ГЕЙМПЛЕЙНАЯ ПЕТЛЯ -->
+  <div class="section">
+    <div class="sec-title">
+      <div class="sec-tag">03</div>
+      <div class="sec-name">Как это работает</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="flow">
+      <div class="flow-label">// СТАНДАРТНЫЙ ЦИКЛ — КАК РОЖДАЕТСЯ КОНТЕНТ</div>
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-text"><strong>Радар инженера</strong> фиксирует угрозу или поломку на маршруте между базами</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-text">Инженер <strong>сообщает по рации</strong> разведчикам на своей частоте</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-text">Разведчик <strong>выдвигается на Barc или AT-DP</strong> к точке</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-text">Если нужна поддержка — <strong>пилот забирает бойцов и медика</strong> с крейсера на LAAT</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">5</div>
+        <div class="flow-text"><strong>Группа выполняет задачу</strong> — зачищает, чинит, разведывает</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">6</div>
+        <div class="flow-text"><strong>Рапорт в дискорд</strong> — возврат на базу.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 КРЕДИТЫ -->
+  <div class="section">
+    <div class="sec-title">
+      <div class="sec-tag">04</div>
+      <div class="sec-name">Система кредитов</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="credits-box">
+      <div class="credits-desc">
+        Мы в дефиците — Республика не может открыто снабжать скрытную операцию. Все ресурсы зарабатываются в бою. <strong>Корпус получает кредиты за выполнение операций и заданий командования</strong> — и тратит их на то что считает нужным.<br><br>
+        Решение принимает <em>командование корпуса</em> — потратить на новую технику или укрепить оборону базы турелями. Потерял технику в бою — она не вернётся сама. Реальные последствия реальных решений.
+      </div>
+      <div class="credits-rows">
+        <div class="credits-row">
+          <span class="cr-name">Патрульная операция</span>
+          <span class="cr-val">+ ? CR</span>
+        </div>
+        <div class="credits-row">
+          <span class="cr-name">Диверсионная миссия</span>
+          <span class="cr-val">+ ? CR</span>
+        </div>
+        <div class="credits-row">
+          <span class="cr-name">Отражение атаки на базу</span>
+          <span class="cr-val">+ ? CR</span>
+        </div>
+        <div class="credits-row">
+          <span class="cr-name">Задание командования</span>
+          <span class="cr-val">+ ? CR</span>
+        </div>
+      </div>
+      <div class="credits-note">
+        // Парк техники и стоимость улучшений будут опубликованы командованием отдельно.<br>
+        // <span>Кредиты — общий ресурс корпуса</span>, не личные деньги игрока.
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 ДОНАТ -->
+  <div class="section">
+    <div class="sec-title">
+      <div class="sec-tag">05</div>
+      <div class="sec-name">Поддержка сервера</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="donate-grid">
+      <div class="donate-card a">
+        <div class="donate-icon">🎨</div>
+        <div class="donate-title">Косметика</div>
+        <ul class="donate-list">
+          <li>Кастомный скин брони</li>
+          <li>Особая маркировка шлема</li>
+          <li>Уникальный ник</li>
+          <li>Особое обращение в рации</li>
+        </ul>
+      </div>
+      <div class="donate-card b">
+        <div class="donate-icon">⚔️</div>
+        <div class="donate-title">Элитные роли</div>
+        <ul class="donate-list">
+          <li>ARC Trooper — элита корпуса</li>
+          <li>RC — Republic Commando</li>
+          <li>Инструктор</li>
+          <li>Джедай — ограничено</li>
+        </ul>
+      </div>
+      <div class="donate-card c">
+        <div class="donate-icon">🔫</div>
+        <div class="donate-title">Вооружение</div>
+        <ul class="donate-list">
+          <li>Только с лорным обоснованием</li>
+          <li>Трофейное или экспериментальное</li>
+          <li>Не даёт боевого преимущества</li>
+        </ul>
+      </div>
+    </div>
+    <div class="donate-note">
+      // <span>Донат не даёт огромного преимущества в бою.</span> Платишь за атмосферу и уникальность — не за превосходство над другими игроками. Звания зарабатываются только в процессе игры.
+    </div>
+  </div>
+
+  <!-- 06 ВХОД -->
+  <div class="section">
+    <div class="sec-title">
+      <div class="sec-tag">06</div>
+      <div class="sec-name">Как попасть на сервер</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="entry-steps">
+      <div class="entry-step">
+        <div class="entry-num">1</div>
+        <div>
+          <div class="entry-title">Напиши квенту</div>
+          <div class="entry-desc">Вместо стандартной кадетки — короткая история твоего клона. Имя, номер, подразделение которое хочешь, пара строк о характере и прошлом до заброски на планету. Это займёт 10-15 минут но зато твой персонаж будет живым с первого дня.</div>
+        </div>
+      </div>
+      <div class="entry-step">
+        <div class="entry-num">2</div>
+        <div>
+          <div class="entry-title">Дождись одобрения</div>
+          <div class="entry-desc">Обучающий рассматривает квенту и выдаёт доступ.</div>
+        </div>
+      </div>
+      <div class="entry-step">
+        <div class="entry-num">3</div>
+        <div>
+          <div class="entry-title">Подключайся и получи номер</div>
+          <div class="entry-desc">При первом заходе система автоматически выдаёт тебе уникальный номер клона — CT-XXXXX. Он твой навсегда.</div>
+        </div>
+      </div>
+    </div>
+    <div class="rules-box">
+      <div class="rules-title">// ОБЯЗАТЕЛЬНЫЕ ТРЕБОВАНИЯ</div>
+      <ul class="rules-list">
+        <li>Микрофон обязателен — без него играть не получится</li>
+        <li>Push-to-talk обязателен — никакого фонового шума</li>
+        <li>Весь голос только в роли (IC) — рации, живой диалог</li>
+        <li>OOC общение — только текст через (( )) или OOC чат</li>
+        <li>Язык сервера — русский</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>// 91-Й РАЗВЕДОВАТЕЛЬНЫЙ КОРПУС — ОПЕРАЦИЯ: ТИХАЯ ЗЕМЛЯ  //</span><br>
+    GMOD STAR WARS RP — РУССКОЯЗЫЧНЫЙ СЕРВЕР<br>
+    <span>ЗА РЕСПУБЛИКУ. ЗА КОРПУС.</span>
+  </div>
+
+</div>
+</body>
+</html>
